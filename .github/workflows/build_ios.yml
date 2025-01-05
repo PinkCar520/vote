@@ -28,6 +28,11 @@ jobs:
       - name: Build iOS Release App
         run: flutter build ios --release --no-codesign
 
+      # 调试：检查是否生成了归档文件
+      - name: Check build directory
+        run: |
+          ls -l build/ios/archive/
+
       # 创建 .ipa 文件并导出
       - name: Package .app to .ipa
         run: |
