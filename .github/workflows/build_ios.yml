@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # 使用 macOS 构建环境
+    runs-on: macos-latest  # 使用 macOS 环境构建
 
     steps:
       # 检出代码
@@ -18,23 +18,17 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'  # 您可以指定特定的 Flutter 版本
+          flutter-version: '3.24.5'  # 您可以指定 Flutter 版本
 
       # 安装依赖项
       - name: Install dependencies
         run: flutter pub get
 
-      # 构建 iOS 应用（Release 模式，构建归档文件）
+      # 构建 iOS 应用（Release 模式，无需签名）
       - name: Build iOS Release App
-        run: |
-          flutter build ios --release --no-codesign
-          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -archivePath build/ios/archive/Runner.xcarchive archive CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        run: flutter build ios --release --no-codesign
 
-      # 确认归档文件是否生成
-      - name: List the contents of build/ios
-        run: ls -R build/ios
-
-      # 打包 .app 为 .ipa
+      # 创建 .ipa 文件并导出
       - name: Package .app to .ipa
         run: |
           mkdir -p build/ios/ipa
@@ -43,7 +37,7 @@ jobs:
             -exportPath build/ios/ipa \
             -exportOptionsPlist ios/ExportOptions.plist
 
-      # 上传构建的 .ipa 文件作为 Artifact
+      # 上传 .ipa 文件作为构建产物
       - name: Upload IPA
         uses: actions/upload-artifact@v3
         with:
