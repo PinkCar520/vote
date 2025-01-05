@@ -28,7 +28,7 @@ jobs:
       - name: Build iOS Release App
         run: |
           flutter build ios --release --no-codesign
-          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -archivePath build/ios/archive/Runner.xcarchive archive
+          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -archivePath build/ios/archive/Runner.xcarchive archive CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
       # 确认归档文件是否生成
       - name: List the contents of build/ios
