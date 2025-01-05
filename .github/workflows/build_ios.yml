@@ -24,9 +24,15 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 构建 iOS 应用（Debug 模式，无需签名）
-      - name: Build iOS Debug App
-        run: flutter build ios --debug --no-codesign
+      # 构建 iOS 应用（Release 模式，构建归档文件）
+      - name: Build iOS Release App
+        run: |
+          flutter build ios --release --no-codesign
+          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -archivePath build/ios/archive/Runner.xcarchive archive
+
+      # 确认归档文件是否生成
+      - name: List the contents of build/ios
+        run: ls -R build/ios
 
       # 打包 .app 为 .ipa
       - name: Package .app to .ipa
