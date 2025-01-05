@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
   <key>method</key>
-  <string>development</string>
+  <string>ad-hoc</string> <!-- 也可以选择 enterprise 或 app-store 具体取决于需求 -->
   <key>signingStyle</key>
-  <string>none</string>
+  <string>none</string> <!-- 禁用签名 -->
   <key>stripSwiftSymbols</key>
   <true/>
   <key>compileBitcode</key>
