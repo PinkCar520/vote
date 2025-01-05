@@ -18,7 +18,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'  # 您可以指定特定的 Flutter 版本
+          flutter-version: '3.24.5'  # 您可以指定特定的 Flutter 版本
 
       # 安装依赖项
       - name: Install dependencies
